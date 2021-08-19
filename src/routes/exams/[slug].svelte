@@ -2,7 +2,7 @@
 	import client from '$src/client';
 	export async function load({ page, fetch, session, context }) {
 		const params = { slug: page.params.slug };
-		const query = `*[_type == "examLink" && batch->slug.current == $slug]{name, link, 'category': category->title}`;
+		const query = `*[_type == "examLink" && batch->slug.current == $slug]{name, link, 'category': category->title} | order(order asc)`;
 		const batchQuery = `*[_type == "batch" && slug.current == $slug]{name, "slug": slug.current, description}`;
 		const examLinks: ExamLink[] = await client.fetch(query, params);
 		const batch: Batch = (await client.fetch(batchQuery, params))[0];
