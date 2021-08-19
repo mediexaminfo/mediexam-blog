@@ -1,3 +1,4 @@
+import adapter from '@sveltejs/adapter-netlify';
 import preprocess from 'svelte-preprocess';
 import path from "path";
 
@@ -9,6 +10,7 @@ const config = {
 
 	kit: {
 		target: '#svelte',
+		adapter: adapter(),
 		vite: {
 			resolve: {
 				alias: {
