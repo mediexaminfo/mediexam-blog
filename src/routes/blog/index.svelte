@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import client from '$src/client';
 	export async function load({ page, fetch, session, context }) {
-		const query = `*[_type == "category"] {"slug": slug.current, title, description}`;
+		const query = `*[_type == "category"] {"slug": slug.current, title, description, order} | order(order asc)`;
 		const categories: PostCategory[] = await client.fetch(query);
 		return { props: { categories } };
 	}
