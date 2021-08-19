@@ -2,7 +2,7 @@
 	import client from '$src/client';
 	export async function load({ page, fetch, session, context }) {
 		const params = { slug: page.params.slug };
-		const query = `*[_type == "post" && category->slug.current == $slug]{title, description, publishedAt, "author": author->name, "authorSlug":author->slug.current, "slug": slug.current, "category": category->title, "categorySlug": category->slug.current} | order(order asc)`;
+		const query = `*[_type == "post" && category->slug.current == $slug]{title, description, publishedAt, "author": author->name, "authorSlug":author->slug.current, "slug": slug.current, "category": category->title, "categorySlug": category->slug.current, order} | order(order asc)`;
 		const categoryQuery = `*[_type == "category" && slug.current == $slug]{title, slug, description}`;
 		const posts: PostData[] = await client.fetch(query, params);
 		const category: PostCategory = (await client.fetch(categoryQuery, params))[0];
