@@ -43,7 +43,7 @@
 		</div>
 		<div class="flex flex-wrap -m-4">
 			{#each categories as category}
-				<div class="p-4 lg:w-1/4 sm:w-1/2 w-full">
+				<div class="p-4 sm:w-1/2 w-full">
 					<h2
 						class="font-medium tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-left"
 					>
@@ -54,10 +54,13 @@
 					>
 						{#each examLinks as examLink}
 							{#if examLink.category === category}
-								<a class="flex flex-row items-center" href={examLink.link} rel="noopener noreferrer" target="_blank">
-									<span
-										class="block text-primary-500 mr-2"
-									>
+								<a
+									class="flex flex-row items-center"
+									href={examLink.link}
+									rel="noopener noreferrer"
+									target="_blank"
+								>
+									<span class="block text-primary-500 mr-2">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											class="h-6 w-6"
@@ -72,7 +75,7 @@
 												d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
 											/>
 										</svg>
-									</span><span class="block leading-none">First Link</span>
+									</span><span class="block leading-none">{examLink.name}</span>
 								</a>
 							{/if}
 						{/each}

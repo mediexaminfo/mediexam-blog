@@ -32,7 +32,7 @@
 						class="xl:w-1/3 md:w-1/2 p-4 hover:-translate-y-2 hover:opacity-80 transition duration-300 ease-in-out"
 					>
 						<div class="border border-gray-200 p-6 rounded-lg">
-							<h2 class="text-lg text-primary font-medium title-font mb-2 uppercase">
+							<h2 class="text-lg text-primary-500 font-medium title-font mb-2 uppercase">
 								{category.title}
 							</h2>
 							<p class="leading-relaxed text-base">
