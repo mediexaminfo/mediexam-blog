@@ -1,13 +1,25 @@
 <script lang="ts" context="module">
+	import h from 'hyperscript';
+	import imageUrlBuilder from '@sanity/image-url';
 	import client from '$src/client';
 	import blocksToHtml from '@sanity/block-content-to-html';
+
+	const builder = imageUrlBuilder(client);
+	const urlFor = (source) => builder.image(source);
+
 	export async function load({ page, fetch, session, context }) {
 		const params = { slug: page.params.slug };
 		const query = `*[_type == "post" && slug.current == $slug]{title, description, publishedAt, "author": author->name, "authorSlug":author->slug.current, "slug": slug.current, "category": category->title, "categorySlug": category->slug.current, body, "imageUrl": mainImage.asset->url}`;
 		const post: Post = (await client.fetch(query, params))[0];
 		const html = blocksToHtml({
 			blocks: post.body,
-			imageOptions: { w: 320, h: 240, fit: 'max' },
+			serializers: {
+				types: {
+					image: (props) => {
+						return h('img.rounded.mx-auto', { src: urlFor(props.node.asset).maxWidth(500).url() });
+					}
+				}
+			},
 			projectId: 'e5mb4tjm',
 			dataset: 'production'
 		});
@@ -46,12 +58,15 @@
 					<span class="mt-1 text-gray-500 text-sm">{date}</span>
 				</div>
 				<div class="md:flex-grow">
-					<h2 class="text-2xl font-medium text-gray-700 mb-2">
+					<h2 class="text-4xl font-medium text-gray-700 mb-2">
 						{post.title}
 					</h2>
-					<p class="prose-lg">
-						{@html html}
+					<p class="text-xl text-gray-600 pb-4 border-b border-gray-200">
+						{post.description}
 					</p>
+					<div class="prose-lg">
+						{@html html}
+					</div>
 				</div>
 			</div>
 		</div>
