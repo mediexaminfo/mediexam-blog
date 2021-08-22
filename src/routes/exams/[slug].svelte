@@ -4,14 +4,16 @@
 		const params = { slug: page.params.slug };
 		const query = `*[_type == "examLink" && batch->slug.current == $slug]{name, link, 'category': category->title, order} | order(order asc)`;
 		const batchQuery = `*[_type == "batch" && slug.current == $slug]{name, "slug": slug.current, description}`;
-		const examLinks: ExamLink[] = await client.fetch(query, params);
+		let examLinks: ExamLink[] = await client.fetch(query, params);
+		examLinks = examLinks.sort((a, b) => a.name.localeCompare(b.name));
 		const batch: Batch = (await client.fetch(batchQuery, params))[0];
-		const categories = [];
+		let categories = [];
 		for (const examLink of examLinks) {
 			if (!categories.includes(examLink.category)) {
 				categories.push(examLink.category);
 			}
 		}
+		categories = categories.sort((a, b) => a.localeCompare(b));
 		return { props: { batch: batch, examLinks: examLinks, categories: categories } };
 	}
 </script>
