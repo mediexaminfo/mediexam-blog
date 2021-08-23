@@ -84,7 +84,7 @@
 					</nav>
 				</div>
 			{:else}
-				Nothing here. Sorry.
+				<h1 class="text-2xl text-gray-700">Nothing here. Check back later.</h1>
 			{/each}
 		</div>
 	</div>
