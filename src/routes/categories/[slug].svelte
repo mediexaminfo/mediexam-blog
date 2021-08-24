@@ -51,7 +51,7 @@
 								class="block text-gray-700 transition hover:text-gray-400 duration-300 ease-in-out"
 							>
 								<h1 class="block title-font text-xl font-medium mt-1">{post.title}</h1>
-								<p class="block leading-relaxed my-2">
+								<p class="block leading-relaxed my-2 px-4">
 									{post.description}
 								</p>
 							</a>
